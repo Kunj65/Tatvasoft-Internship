@@ -1,0 +1,50 @@
+-- Creating Department Tbale
+CREATE TABLE departments (
+    department_id SERIAL PRIMARY KEY,
+    department_name VARCHAR(50)
+);
+
+-- Creating Employees Table
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    employee_name VARCHAR(50) not null,
+    salary NUMERIC,
+    department_id INTEGER REFERENCES departments(department_id)
+);
+
+-- Insert departments in departments table
+INSERT INTO departments (department_name) VALUES
+('HR'),
+('Engineering'),
+('Sales');
+
+-- Insert employees data in employees table
+INSERT INTO employees (employee_name, salary, department_id) VALUES
+('Kunj', 5000, 1),
+('Nevil', 4500, 1),
+('Durv', 7000, 2),
+('Vasu', 7500, 2),
+('Het', 7200, 2),
+('Param', 3000, 3),
+('Divyang', 3200, 3);
+
+--UPDATE employees data in employees data
+SET employee_name = 'Kunj Patel'
+WHERE employee_name = 'Kunj';
+
+--Deleting data from employees table
+DELETE FROM employees
+WHERE employee_name = 'Kunj';
+
+--Subquerry in employees table
+SELECT name, salary
+FROM employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employees
+);
+
+
+select * from departments;
+select * from employees;
+DROP TABLE employees;
